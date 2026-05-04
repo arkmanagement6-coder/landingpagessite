@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Coaching | Crack Your Exams</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-yellow: #f59e0b;
+            --secondary-hover: #d97706;
+            --dark-navy: #0f172a;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-navy);
+        }
+
+        a { text-decoration: none; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-yellow);
+            color: var(--dark-navy);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-yellow);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-navy);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .call-now {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-navy);
+        }
+
+        /* --- Hero Slider --- */
+        .hero {
+            padding-top: 80px;
+            position: relative;
+            background-color: var(--dark-navy);
+            overflow: hidden;
+        }
+
+        .slides-container {
+            position: relative;
+            height: 600px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.3) 100%);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 3;
+            max-width: 600px;
+            color: var(--white);
+        }
+
+        .slide-content h1 {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background-color: var(--secondary-yellow);
+            transform: scale(1.2);
+        }
+
+        /* --- Admission Enquiry Form (Floating/Embedded) --- */
+        .enquiry-section {
+            padding: 4rem 0;
+            background-color: var(--bg-light);
+            margin-top: -80px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .form-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            padding: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .form-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .form-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-info p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-benefits ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .form-benefits i {
+            color: var(--secondary-yellow);
+        }
+
+        .enquiry-form {
+            flex: 2;
+            min-width: 300px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* --- Popular Courses --- */
+        .courses-section {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .course-img {
+            height: 200px;
+            background-color: #cbd5e1;
+            position: relative;
+        }
+
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary-yellow);
+            color: var(--dark-navy);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-features span {
+            font-size: 0.8rem;
+            background: #e0e7ff;
+            color: var(--primary-blue);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* --- About Us --- */
+        .about-section {
+            padding: 5rem 0;
+            background-color: var(--bg-light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* --- Why Choose Us --- */
+        .why-us-section {
+            padding: 5rem 0;
+            background-color: var(--dark-navy);
+            color: var(--white);
+        }
+
+        .why-us-section .section-title h2,
+        .why-us-section .section-title p {
+            color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* --- How It Works --- */
+        .steps-section {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .steps-wrapper {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .steps-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            min-width: 150px;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border: 2px solid var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 0 auto 1rem;
+            transition: var(--transition);
+        }
+
+        .step:hover .step-number {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .step h4 {
+            font-size: 1.1rem;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-navy));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e2e8f0;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            padding: 5rem 0;
+            background-color: var(--bg-light);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            color: var(--text-muted);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--dark-navy);
+            color: #cbd5e1;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-col a {
+            color: #cbd5e1;
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: var(--secondary-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .slide-content h1 { font-size: 2.8rem; }
+            .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+            .enquiry-form { grid-template-columns: 1fr; }
+            .steps-wrapper::before { display: none; }
+            .step { margin-bottom: 2rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .call-now { display: none; }
+            .mobile-menu-btn { display: block; }
+            .slide-content h1 { font-size: 2.2rem; }
+            .cta-btns { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i data-lucide="graduation-cap"></i>
+                EduCoach
+            </a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#courses">Courses</a>
+                <a href="#contact">Contact Us</a>
+            </nav>
+            <div class="call-now">
+                <i data-lucide="phone"></i>
+                +91 98568 59685
+            </div>
+            <button class="mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="hero" id="home">
+        <div class="slides-container">
+            <!-- Slide 1 -->
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1600');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1>Crack Your Dream <span style="color: var(--secondary-yellow);">Government Exam</span></h1>
+                        <p>Prepare for SSC, Bank, Railway, Police and Army exams with live classes, study material, mock tests and expert guidance.</p>
+                        <a href="#enquiry" class="btn btn-secondary"><i data-lucide="message-circle"></i> WhatsApp Enquiry</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1600');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1>Start Your <span style="color: var(--secondary-yellow);">NEET & JEE</span> Preparation</h1>
+                        <p>Learn from experienced faculty with concept-based classes, doubt sessions and regular test practice from home.</p>
+                        <a href="#courses" class="btn btn-primary">Join Online Class</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1600');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1>Smart Coaching for <span style="color: var(--secondary-yellow);">CUET & Careers</span></h1>
+                        <p>Prepare for university entrances with structured batches, notes, practice tests and personal support.</p>
+                        <a href="#enquiry" class="btn btn-secondary">Get Free Counselling</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <div class="dot active" data-index="0"></div>
+            <div class="dot" data-index="1"></div>
+            <div class="dot" data-index="2"></div>
+        </div>
+    </section>
+
+    <!-- Admission Enquiry Form -->
+    <section class="enquiry-section" id="enquiry">
+        <div class="container">
+            <div class="form-card">
+                <div class="form-info">
+                    <h3>Admission Enquiry Form</h3>
+                    <p>Fill the form and our expert counsellor will contact you shortly to guide your preparation journey.</p>
+                    <div class="form-benefits">
+                        <ul>
+                            <li><i data-lucide="check-circle"></i> Free Career Counselling</li>
+                            <li><i data-lucide="check-circle"></i> Demo Class Access</li>
+                            <li><i data-lucide="check-circle"></i> Scholarship Details</li>
+                        </ul>
+                    </div>
+                </div>
+                <form class="enquiry-form" id="mainEnquiryForm">
+                    <div class="form-group">
+                        <label>Student Name</label>
+                        <input type="text" placeholder="Enter full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" placeholder="Enter whatsapp number" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Exam Category</label>
+                        <select required>
+                            <option value="">Choose Exam...</option>
+                            <option>SSC</option>
+                            <option>Bank</option>
+                            <option>Railway</option>
+                            <option>Police/Army</option>
+                            <option>NEET</option>
+                            <option>CUET</option>
+                            <option>JEE</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Subject</label>
+                        <select>
+                            <option value="">All Subjects</option>
+                            <option>Maths</option>
+                            <option>Reasoning</option>
+                            <option>English</option>
+                            <option>GK/GS</option>
+                            <option>Physics / Chemistry / Biology</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Mode</label>
+                        <select>
+                            <option>Live Online Class</option>
+                            <option>Recorded Class</option>
+                            <option>Test Series</option>
+                            <option>Complete Course</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" placeholder="Enter your city">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Message (Optional)</label>
+                        <textarea rows="3" placeholder="Any specific query?"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Submit Enquiry</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses -->
+    <section class="courses-section" id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Courses</h2>
+                <p>Choose from our most enrolled online batches designed by top educators.</p>
+            </div>
+            <div class="course-grid">
+                <!-- Course 1 -->
+                <div class="course-card">
+                    <div class="course-img">
+                        <span class="course-badge">Bestseller</span>
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=600" alt="SSC">
+                    </div>
+                    <div class="course-content">
+                        <h3>SSC Complete Batch</h3>
+                        <div class="course-features">
+                            <span>Live Classes</span>
+                            <span>PDF Notes</span>
+                            <span>Mock Tests</span>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Complete syllabus coverage for CGL, CHSL, MTS & GD.</p>
+                        <a href="#enquiry" class="btn btn-primary" style="width: 100%;">Enroll Now</a>
+                    </div>
+                </div>
+                <!-- Course 2 -->
+                <div class="course-card">
+                    <div class="course-img">
+                        <span class="course-badge">New</span>
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600" alt="Bank">
+                    </div>
+                    <div class="course-content">
+                        <h3>Bank Foundation Batch</h3>
+                        <div class="course-features">
+                            <span>Pre + Mains</span>
+                            <span>Doubt Sessions</span>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Target IBPS, SBI & RBI exams with expert banking faculty.</p>
+                        <a href="#enquiry" class="btn btn-primary" style="width: 100%;">Enroll Now</a>
+                    </div>
+                </div>
+                <!-- Course 3 -->
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600" alt="NEET">
+                    </div>
+                    <div class="course-content">
+                        <h3>NEET Target Batch</h3>
+                        <div class="course-features">
+                            <span>NCERT Focus</span>
+                            <span>Test Series</span>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Complete PCB preparation for medical entrance.</p>
+                        <a href="#enquiry" class="btn btn-primary" style="width: 100%;">Enroll Now</a>
+                    </div>
+                </div>
+                <!-- Course 4 -->
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600" alt="CUET">
+                    </div>
+                    <div class="course-content">
+                        <h3>CUET Preparation</h3>
+                        <div class="course-features">
+                            <span>Domain Subjects</span>
+                            <span>General Test</span>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Secure your seat in top central universities.</p>
+                        <a href="#enquiry" class="btn btn-primary" style="width: 100%;">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 style="color: var(--dark-navy);">Learn Anytime, Anywhere with Online Coaching</h2>
+                    <p>We provide result-focused online coaching classes for competitive exams and entrance exams. Our goal is to make quality education accessible for every student through live interactive classes, expert teachers, doubt-solving sessions, study materials and regular mock tests.</p>
+                    <p>Whether you are preparing for government jobs, medical entrance, engineering entrance or university admission exams, our online coaching platform helps you study smart and stay consistent.</p>
+                    <div style="margin-top: 2rem;">
+                        <a href="#contact" class="btn btn-primary">Know More About Us</a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" alt="Students Learning">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Us?</h2>
+                <p>We provide everything you need to succeed in your exams.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="users"></i></div>
+                    <h3>Experienced Faculty</h3>
+                    <p>Learn from top educators with years of proven selection records.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="video"></i></div>
+                    <h3>Live Online Classes</h3>
+                    <p>Interactive sessions that feel just like a real classroom.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="play-circle"></i></div>
+                    <h3>Recorded Lectures</h3>
+                    <p>Missed a class? Watch the recording anytime, anywhere.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="file-text"></i></div>
+                    <h3>Exam Material</h3>
+                    <p>Updated PDF notes, daily practice questions and current affairs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="help-circle"></i></div>
+                    <h3>Doubt Support</h3>
+                    <p>Dedicated doubt clearing sessions via chat and voice.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="smartphone"></i></div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Study on the go with our optimized mobile learning experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Details -->
+    <section class="courses-section" style="background-color: var(--bg-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Specializations</h2>
+                <p>Detailed overview of our coaching programs.</p>
+            </div>
+            <div class="about-grid" style="gap: 2rem; align-items: start;">
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><i data-lucide="building"></i> SSC Coaching</h3>
+                    <p style="color: var(--text-muted);">Prepare for SSC CGL, CHSL, MTS, GD and other SSC exams with complete syllabus coverage, mock tests and shortcut tricks.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><i data-lucide="landmark"></i> Bank Coaching</h3>
+                    <p style="color: var(--text-muted);">Get expert preparation for IBPS, SBI, RBI and other banking exams with special focus on reasoning, maths, English and banking awareness.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><i data-lucide="train"></i> Railway Coaching</h3>
+                    <p style="color: var(--text-muted);">Join online Railway exam coaching for NTPC, Group D, ALP and other railway recruitment exams.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><i data-lucide="shield"></i> Police / Army</h3>
+                    <p style="color: var(--text-muted);">Prepare for Police, Defence, Army and other physical plus written exams with proper guidance and practice.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><i data-lucide="stethoscope"></i> NEET & JEE</h3>
+                    <p style="color: var(--text-muted);">Complete online preparation with Physics, Chemistry, Biology and Maths classes, test series and strong concept building.</p>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><i data-lucide="book-open"></i> CUET Coaching</h3>
+                    <p style="color: var(--text-muted);">Prepare for CUET entrance exam with subject-wise classes, general test preparation and university admission guidance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="steps-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Start your journey in 5 simple steps.</p>
+            </div>
+            <div class="steps-wrapper">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Fill Enquiry Form</h4>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Get Counselling Call</h4>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Select Your Course</h4>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Start Live Classes</h4>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h4>Practice & Track</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Start Your Exam Preparation Today</h2>
+            <p>Join our online coaching classes and take the first step toward your dream career. Live Classes | Recorded Videos | PDF Notes | Mock Tests | Doubt Solving</p>
+            <div class="cta-btns">
+                <a href="#enquiry" class="btn btn-secondary" style="padding: 15px 30px; font-size: 1.1rem;"><i data-lucide="message-square"></i> WhatsApp Now</a>
+                <a href="#contact" class="btn btn-primary" style="background: white; color: var(--primary-blue); padding: 15px 30px; font-size: 1.1rem;">Submit Enquiry</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Have questions? Reach out to us via phone, email, or fill out the quick contact form.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i data-lucide="phone"></i>
+                            <div>
+                                <h4>Mobile</h4>
+                                <p>+91 98568 59685</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="mail"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@onlinecoaching.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="map-pin"></i>
+                            <div>
+                                <h4>Centers</h4>
+                                <p>Delhi, Mumbai, Bangalore</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-card" style="padding: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Quick Enquiry</h3>
+                    <form class="enquiry-form" style="grid-template-columns: 1fr;">
+                        <div class="form-group full-width">
+                            <input type="text" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="tel" placeholder="Mobile Number" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <select required>
+                                <option value="">Select Course</option>
+                                <option>SSC Batch</option>
+                                <option>Banking Batch</option>
+                                <option>NEET/JEE Batch</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <textarea rows="3" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn btn-primary">Send Enquiry</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i data-lucide="graduation-cap" style="color: var(--secondary-yellow);"></i>
+                        EduCoach
+                    </div>
+                    <p style="margin-bottom: 1.5rem;">Your trusted platform for online competitive exam coaching and entrance exam preparation.</p>
+                    <div class="social-links">
+                        <a href="#"><i data-lucide="facebook"></i></a>
+                        <a href="#"><i data-lucide="instagram"></i></a>
+                        <a href="#"><i data-lucide="youtube"></i></a>
+                        <a href="#"><i data-lucide="linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#courses">Services</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#enquiry">Admission Enquiry</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="#">SSC Coaching</a></li>
+                        <li><a href="#">Bank Coaching</a></li>
+                        <li><a href="#">Railway Coaching</a></li>
+                        <li><a href="#">Police/Army Coaching</a></li>
+                        <li><a href="#">NEET/JEE Coaching</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Details</h4>
+                    <ul style="gap: 1.2rem;">
+                        <li style="display: flex; gap: 10px;"><i data-lucide="phone" style="color: var(--secondary-yellow);"></i> 98568 59685</li>
+                        <li style="display: flex; gap: 10px;"><i data-lucide="mail" style="color: var(--secondary-yellow);"></i> info@onlinecoaching.com</li>
+                        <li style="display: flex; gap: 10px;"><i data-lucide="map-pin" style="color: var(--secondary-yellow);"></i> Delhi | Mumbai | Bangalore</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Online Coaching. All Rights Reserved.</p>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="#" style="color: #cbd5e1;">Privacy Policy</a>
+                    <a href="#" style="color: #cbd5e1;">Terms & Conditions</a>
+                    <a href="#" style="color: #cbd5e1;">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '0';
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
+
+        // Simple Slider Logic
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+        const slideInterval = 5000; // 5 seconds
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        let slideTimer = setInterval(nextSlide, slideInterval);
+
+        // Dot Click Logic
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideTimer);
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                currentSlide = index;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+                slideTimer = setInterval(nextSlide, slideInterval);
+            });
+        });
+
+        // Form Submission Simulation
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                btn.textContent = 'Sending...';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    btn.textContent = 'Enquiry Sent Successfully!';
+                    btn.style.backgroundColor = '#10b981'; // Success Green
+                    form.reset();
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.backgroundColor = '';
+                        btn.disabled = false;
+                    }, 3000);
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
