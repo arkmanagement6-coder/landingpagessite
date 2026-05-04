@@ -907,21 +907,25 @@
         }
 
         .social-links a {
-            width: 40px;
-            height: 40px;
+            width: 40px !important;
+            height: 40px !important;
             background: rgba(255,255,255,0.1);
-            display: inline-flex;
+            display: flex !important;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             transition: var(--transition);
-            color: #ffffff;
+            color: #ffffff !important;
         }
 
-        .social-links a svg {
-            width: 20px;
-            height: 20px;
-            stroke: currentColor;
+        .social-links a i, .social-links a svg {
+            width: 20px !important;
+            height: 20px !important;
+            stroke: #ffffff !important;
+            color: #ffffff !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         .social-links a:hover {
