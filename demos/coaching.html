@@ -115,50 +115,163 @@
             margin: 0 auto;
         }
 
+        /* --- Top Bar --- */
+        .top-bar {
+            background-color: var(--dark-navy);
+            color: #e2e8f0;
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-left {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-bar-left span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .top-bar-left i {
+            color: var(--secondary-yellow);
+            width: 14px;
+            height: 14px;
+        }
+
+        .top-bar-right {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar-right a {
+            color: #e2e8f0;
+            transition: var(--transition);
+        }
+
+        .top-bar-right a:hover {
+            color: var(--secondary-yellow);
+        }
+
         /* --- Header --- */
         header {
-            position: fixed;
-            top: 0;
+            position: absolute;
+            top: 40px; /* Below top bar initially */
             left: 0;
             width: 100%;
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.sticky {
+            position: fixed;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-bottom: none;
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            height: 90px;
+            transition: height 0.3s ease;
+        }
+
+        header.sticky .header-container {
+            height: 70px;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            color: var(--dark-navy);
+            color: var(--white);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        header.sticky .logo {
+            color: var(--dark-navy);
         }
 
         .logo i {
+            color: var(--secondary-yellow);
+        }
+
+        header.sticky .logo i {
             color: var(--primary-blue);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            font-weight: 500;
+            gap: 2.5rem;
+            background: rgba(0,0,0,0.2);
+            padding: 10px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
             transition: var(--transition);
         }
 
+        header.sticky .nav-links {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        header.sticky .nav-links a {
+            color: var(--text-dark);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-yellow);
+            transition: width 0.3s ease;
+        }
+
+        header.sticky .nav-links a::after {
+            background: var(--primary-blue);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         .nav-links a:hover {
+            color: var(--secondary-yellow);
+        }
+
+        header.sticky .nav-links a:hover {
             color: var(--primary-blue);
         }
 
@@ -166,30 +279,46 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-weight: 600;
-            color: var(--primary-blue);
+            font-weight: 700;
+            color: var(--white);
+            background: var(--primary-blue);
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .call-now:hover {
+            background: var(--secondary-yellow);
+            color: var(--dark-navy);
+            transform: scale(1.05);
         }
 
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            color: var(--white);
+        }
+
+        header.sticky .mobile-menu-btn {
             color: var(--dark-navy);
         }
 
         /* --- Hero Slider --- */
         .hero {
-            padding-top: 80px;
             position: relative;
             background-color: var(--dark-navy);
             overflow: hidden;
+            height: 100vh;
+            min-height: 700px;
         }
 
         .slides-container {
             position: relative;
-            height: 600px;
+            height: 100%;
+            width: 100%;
         }
 
         .slide {
@@ -199,17 +328,34 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 0.8s ease-in-out;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 1s;
             display: flex;
             align-items: center;
-            background-size: cover;
-            background-position: center;
             z-index: 1;
+            overflow: hidden;
         }
 
         .slide.active {
             opacity: 1;
+            visibility: visible;
             z-index: 2;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.1);
+            transition: transform 6s linear;
+        }
+
+        .slide.active .slide-bg {
+            transform: scale(1);
         }
 
         .slide::before {
@@ -219,52 +365,118 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.3) 100%);
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 60%, rgba(15, 23, 42, 0.2) 100%);
+            z-index: 1;
         }
 
         .slide-content {
             position: relative;
             z-index: 3;
-            max-width: 600px;
+            max-width: 700px;
             color: var(--white);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s;
+        }
+
+        .slide.active .slide-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .slide-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--secondary-yellow);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .slide-content h1 {
-            font-size: 3.5rem;
+            font-size: clamp(3rem, 5vw, 4.5rem);
             color: var(--white);
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            line-height: 1.1;
+            font-weight: 800;
         }
 
         .slide-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #cbd5e1;
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: #e2e8f0;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .slide-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .slide-btns .btn {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
         }
 
         .slider-controls {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
-            background-color: rgba(255,255,255,0.4);
+            background-color: transparent;
+            border: 2px solid rgba(255,255,255,0.5);
             cursor: pointer;
             transition: var(--transition);
         }
 
         .dot.active {
             background-color: var(--secondary-yellow);
-            transform: scale(1.2);
+            border-color: var(--secondary-yellow);
+            transform: scale(1.3);
         }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-arrow:hover {
+            background: var(--primary-blue);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-arrow.prev { left: 30px; }
+        .slider-arrow.next { right: 30px; }
 
         /* --- Admission Enquiry Form (Floating/Embedded) --- */
         .enquiry-section {
@@ -744,6 +956,21 @@
 </head>
 <body>
 
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i data-lucide="phone"></i> +91 98568 59685</span>
+                <span><i data-lucide="mail"></i> info@onlinecoaching.com</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#"><i data-lucide="facebook" style="width:16px; height:16px;"></i></a>
+                <a href="#"><i data-lucide="instagram" style="width:16px; height:16px;"></i></a>
+                <a href="#"><i data-lucide="youtube" style="width:16px; height:16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header id="header">
         <div class="container header-container">
@@ -758,8 +985,8 @@
                 <a href="#contact">Contact Us</a>
             </nav>
             <div class="call-now">
-                <i data-lucide="phone"></i>
-                +91 98568 59685
+                <i data-lucide="phone-call"></i>
+                Apply Now
             </div>
             <button class="mobile-menu-btn">
                 <i data-lucide="menu"></i>
@@ -771,36 +998,55 @@
     <section class="hero" id="home">
         <div class="slides-container">
             <!-- Slide 1 -->
-            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1600');">
-                <div class="container">
+            <div class="slide active">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1600');"></div>
+                <div class="container" style="height: 100%; display: flex; align-items: center;">
                     <div class="slide-content">
-                        <h1>Crack Your Dream <span style="color: var(--secondary-yellow);">Government Exam</span></h1>
-                        <p>Prepare for SSC, Bank, Railway, Police and Army exams with live classes, study material, mock tests and expert guidance.</p>
-                        <a href="#enquiry" class="btn btn-secondary"><i data-lucide="message-circle"></i> WhatsApp Enquiry</a>
+                        <span class="slide-badge">Achieve Your Goals</span>
+                        <h1>Crack Your Dream <br><span style="color: var(--secondary-yellow);">Government Exam</span></h1>
+                        <p>Prepare for SSC, Bank, Railway, Police and Army exams with live classes, study material, mock tests and expert guidance from top faculty.</p>
+                        <div class="slide-btns">
+                            <a href="#enquiry" class="btn btn-primary">Start Preparation</a>
+                            <a href="#enquiry" class="btn btn-secondary"><i data-lucide="message-circle"></i> WhatsApp Enquiry</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- Slide 2 -->
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1600');">
-                <div class="container">
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1600');"></div>
+                <div class="container" style="height: 100%; display: flex; align-items: center;">
                     <div class="slide-content">
-                        <h1>Start Your <span style="color: var(--secondary-yellow);">NEET & JEE</span> Preparation</h1>
-                        <p>Learn from experienced faculty with concept-based classes, doubt sessions and regular test practice from home.</p>
-                        <a href="#courses" class="btn btn-primary">Join Online Class</a>
+                        <span class="slide-badge">Medical & Engineering</span>
+                        <h1>Start Your <span style="color: var(--secondary-yellow);">NEET & JEE</span><br>Preparation From Home</h1>
+                        <p>Learn from experienced faculty with concept-based classes, doubt sessions and regular test practice to secure top ranks.</p>
+                        <div class="slide-btns">
+                            <a href="#courses" class="btn btn-primary">Join Online Class</a>
+                            <a href="#enquiry" class="btn btn-secondary">Download Syllabus</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- Slide 3 -->
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1600');">
-                <div class="container">
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1600');"></div>
+                <div class="container" style="height: 100%; display: flex; align-items: center;">
                     <div class="slide-content">
-                        <h1>Smart Coaching for <span style="color: var(--secondary-yellow);">CUET & Careers</span></h1>
-                        <p>Prepare for university entrances with structured batches, notes, practice tests and personal support.</p>
-                        <a href="#enquiry" class="btn btn-secondary">Get Free Counselling</a>
+                        <span class="slide-badge">Your Bright Future</span>
+                        <h1>Smart Coaching for <br><span style="color: var(--secondary-yellow);">CUET & Careers</span></h1>
+                        <p>Prepare for university entrances with structured batches, notes, practice tests and personal support for central universities.</p>
+                        <div class="slide-btns">
+                            <a href="#enquiry" class="btn btn-secondary">Get Free Counselling</a>
+                            <a href="#courses" class="btn btn-primary" style="background: transparent; border: 2px solid white;">View Courses</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="slider-arrow prev"><i data-lucide="chevron-left"></i></div>
+        <div class="slider-arrow next"><i data-lucide="chevron-right"></i></div>
+
         <div class="slider-controls">
             <div class="dot active" data-index="0"></div>
             <div class="dot" data-index="1"></div>
@@ -1233,40 +1479,51 @@
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
-                header.style.padding = '0';
-                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                header.classList.add('sticky');
             } else {
-                header.style.padding = '5px 0';
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+                header.classList.remove('sticky');
             }
         });
 
         // Simple Slider Logic
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.slider-arrow.prev');
+        const nextBtn = document.querySelector('.slider-arrow.next');
         let currentSlide = 0;
-        const slideInterval = 5000; // 5 seconds
+        let slideTimer;
+        const slideInterval = 6000; // 6 seconds for better reading
 
-        function nextSlide() {
+        function goToSlide(n) {
             slides[currentSlide].classList.remove('active');
             dots[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
+            currentSlide = (n + slides.length) % slides.length;
             slides[currentSlide].classList.add('active');
             dots[currentSlide].classList.add('active');
         }
 
-        let slideTimer = setInterval(nextSlide, slideInterval);
+        function nextSlide() { goToSlide(currentSlide + 1); }
+        function prevSlide() { goToSlide(currentSlide - 1); }
+
+        function startSlider() {
+            slideTimer = setInterval(nextSlide, slideInterval);
+        }
+
+        function resetSlider() {
+            clearInterval(slideTimer);
+            startSlider();
+        }
+
+        prevBtn.addEventListener('click', () => { prevSlide(); resetSlider(); });
+        nextBtn.addEventListener('click', () => { nextSlide(); resetSlider(); });
+
+        startSlider();
 
         // Dot Click Logic
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                clearInterval(slideTimer);
-                slides[currentSlide].classList.remove('active');
-                dots[currentSlide].classList.remove('active');
-                currentSlide = index;
-                slides[currentSlide].classList.add('active');
-                dots[currentSlide].classList.add('active');
-                slideTimer = setInterval(nextSlide, slideInterval);
+                goToSlide(index);
+                resetSlider();
             });
         });
 
