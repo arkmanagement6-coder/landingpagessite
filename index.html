@@ -84,7 +84,7 @@
                         <h3>Digital Marketing Landing Page</h3>
                         <p>Best for agencies, consultants, lead generation, and Meta ads.</p>
                         <div class="demo-actions">
-                            <a href="#" class="btn btn-primary">Live Preview</a>
+                            <button class="btn btn-primary preview-btn" data-url="demos/business.html">Live Preview</button>
                             <a href="#contact" class="btn btn-outline">Order Similar</a>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                         <h3>Product Landing Page</h3>
                         <p>Best for product selling, COD orders, payment gateway, and WhatsApp.</p>
                         <div class="demo-actions">
-                            <a href="#" class="btn btn-primary">Live Preview</a>
+                            <button class="btn btn-primary preview-btn" data-url="demos/ecommerce.html">Live Preview</button>
                             <a href="#contact" class="btn btn-outline">Order Similar</a>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         <h3>Fitness Program Page</h3>
                         <p>Best for weight loss, diet plans, and consultation booking.</p>
                         <div class="demo-actions">
-                            <a href="#" class="btn btn-primary">Live Preview</a>
+                            <button class="btn btn-primary preview-btn" data-url="demos/fitness.html">Live Preview</button>
                             <a href="#contact" class="btn btn-outline">Order Similar</a>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                         <h3>Luxury Property Showcase</h3>
                         <p>High-end real estate listings with booking forms and gallery.</p>
                         <div class="demo-actions">
-                            <a href="#" class="btn btn-primary">Live Preview</a>
+                            <button class="btn btn-primary preview-btn" data-url="demos/business.html">Live Preview</button>
                             <a href="#contact" class="btn btn-outline">Order Similar</a>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                         <h3>Online Coaching Portal</h3>
                         <p>Perfect for tutors, course creators, and educational consultants.</p>
                         <div class="demo-actions">
-                            <a href="#" class="btn btn-primary">Live Preview</a>
+                            <button class="btn btn-primary preview-btn" data-url="demos/business.html">Live Preview</button>
                             <a href="#contact" class="btn btn-outline">Order Similar</a>
                         </div>
                     </div>
@@ -164,11 +164,12 @@
                         <h3>Creative Agency Portfolio</h3>
                         <p>Showcase your projects with style and modern animations.</p>
                         <div class="demo-actions">
-                            <a href="#" class="btn btn-primary">Live Preview</a>
+                            <button class="btn btn-primary preview-btn" data-url="demos/business.html">Live Preview</button>
                             <a href="#contact" class="btn btn-outline">Order Similar</a>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -460,6 +461,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- Preview Modal -->
+    <div class="preview-modal" id="previewModal">
+        <div class="modal-header">
+            <div class="device-switcher">
+                <button class="switcher-btn active" data-device="desktop" title="Desktop View"><i data-lucide="monitor"></i></button>
+                <button class="switcher-btn" data-device="tablet" title="Tablet View"><i data-lucide="tablet"></i></button>
+                <button class="switcher-btn" data-device="mobile" title="Mobile View"><i data-lucide="smartphone"></i></button>
+            </div>
+            <div class="modal-actions">
+                <a href="#contact" class="btn btn-primary modal-order-btn">Order Similar</a>
+                <button class="close-modal" id="closeModal"><i data-lucide="x"></i></button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="preview-container desktop" id="previewContainer">
+                <iframe src="" id="previewIframe" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -124,3 +124,63 @@ window.addEventListener('scroll', () => {
         header.style.boxShadow = 'none';
     }
 });
+
+// Live Preview Modal Logic
+const previewModal = document.getElementById('previewModal');
+const previewIframe = document.getElementById('previewIframe');
+const previewContainer = document.getElementById('previewContainer');
+const previewBtns = document.querySelectorAll('.preview-btn');
+const closeModal = document.getElementById('closeModal');
+const switcherBtns = document.querySelectorAll('.switcher-btn');
+const modalOrderBtn = document.querySelector('.modal-order-btn');
+
+function openPreview(url) {
+    previewIframe.src = url;
+    previewModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closePreview() {
+    previewModal.classList.remove('active');
+    previewIframe.src = '';
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+previewBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const url = btn.dataset.url;
+        openPreview(url);
+    });
+});
+
+closeModal.addEventListener('click', closePreview);
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePreview();
+});
+
+// Device Switcher
+switcherBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const device = btn.dataset.device;
+        
+        // Update active button
+        switcherBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update container class
+        previewContainer.className = `preview-container ${device}`;
+    });
+});
+
+// Modal Order Button - Close and Scroll
+modalOrderBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    closePreview();
+    const contactSection = document.getElementById('contact');
+    window.scrollTo({
+        top: contactSection.offsetTop - 80,
+        behavior: 'smooth'
+    });
+});

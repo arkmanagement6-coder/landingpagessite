@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Landing Page Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #0f172a;
+            --text: #334155;
+            --light: #f8fafc;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--light); line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+        header { padding: 1.5rem 0; background: white; border-bottom: 1px solid #e2e8f0; }
+        .logo { font-weight: 800; font-size: 1.2rem; color: var(--dark); }
+        .hero { padding: 5rem 0; text-align: center; background: linear-gradient(to bottom, #eff6ff, white); }
+        .hero h1 { font-size: 3rem; color: var(--dark); margin-bottom: 1.5rem; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .btn { padding: 0.8rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn-primary { background: var(--primary); color: white; border: none; }
+        .section { padding: 4rem 0; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .card { padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .card i { color: var(--primary); margin-bottom: 1rem; }
+        footer { padding: 3rem 0; background: var(--dark); color: white; text-align: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">STRATEGIZE.AI</div>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <h1>Scale Your Business With <span style="color: var(--primary)">Expert Marketing</span></h1>
+            <p>We help ambitious brands grow through data-driven strategies and creative execution.</p>
+            <a href="#" class="btn btn-primary">Start Your Growth Journey</a>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Services</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <i data-lucide="bar-chart"></i>
+                    <h3>Data Analytics</h3>
+                    <p>Deep insights into your customer behavior and campaign performance.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="search"></i>
+                    <h3>SEO Optimization</h3>
+                    <p>Rank higher on Google and drive organic traffic to your site.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="megaphone"></i>
+                    <h3>Paid Ads</h3>
+                    <p>High-ROI campaigns on Facebook, Google, and LinkedIn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2026 Strategize.ai. All rights reserved.</p>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

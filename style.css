@@ -534,6 +534,136 @@ footer {
     }
 }
 
+/* Preview Modal */
+.preview-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-dark);
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.preview-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-header {
+    padding: 1rem 2rem;
+    background: var(--bg-glass);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-glass);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.device-switcher {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.3rem;
+    border-radius: 12px;
+}
+
+.switcher-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switcher-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.switcher-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.close-modal {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: var(--transition-smooth);
+}
+
+.close-modal:hover {
+    color: var(--primary);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    flex: 1;
+    background: #1a1a1c;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.preview-container {
+    background: white;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.preview-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.preview-container.desktop {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.preview-container.tablet {
+    width: 768px;
+    height: 1024px;
+    max-height: 100%;
+}
+
+.preview-container.mobile {
+    width: 375px;
+    height: 667px;
+    max-height: 100%;
+}
+
+.modal-order-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+}
+
 /* Animations */
 @keyframes fadeInUp {
     from {
